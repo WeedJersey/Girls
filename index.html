@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hacked</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background-color: black;
+      color: #00ff00;
+      font-family: 'Courier New', Courier, monospace;
+      margin: 0;
+      padding-top: 30px; /* Reduced from 60 */
+      text-align: center;
+    }
+
+    .hacker-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      flex-wrap: nowrap;
+    }
+
+    .gif {
+      width: 250px;
+      height: 250px;
+    }
+
+    .title-wrapper {
+      flex: 1;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3em;
+      animation: glitch 2s infinite, blink 1s infinite;
+      display: inline-block;
+      position: relative;
+      white-space: nowrap;
+    }
+
+    @keyframes glitch {
+      0% { transform: translate(0, 0); }
+      10% { transform: translate(-2px, -2px); }
+      20% { transform: translate(2px, 2px); }
+      30% { transform: translate(-2px, 2px); }
+      40% { transform: translate(2px, -2px); }
+      50% { transform: translate(0, 0); }
+      100% { transform: translate(0, 0); }
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    #ip-display {
+      font-size: 1.3em;
+      margin-top: 40px;
+      font-weight: bold;
+    }
+
+    .terminal {
+      margin-top: 20px;
+      font-size: 0.9em;
+      line-height: 1.5;
+      white-space: pre;
+      text-align: center;
+    }
+
+    #ip-details {
+      margin-top: 10px;
+      font-size: 1em;
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      font-size: 0.8em;
+      color: #555;
+      text-align: center;
+    }
+
+    @media (max-width: 800px) {
+      .hacker-container {
+        flex-direction: column;
+        padding: 0;
+      }
+
+      .gif {
+        width: 150px;
+        height: 150px;
+        margin: 10px 0;
+      }
+
+      h1 {
+        font-size: 2.2em;
+      }
+
+      #ip-display,
+      .terminal,
+      #ip-details {
+        margin-top: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hacker Title with GIFs on Left & Right -->
+  <div class="hacker-container">
+    <img src="3dgifmaker62240.gif" alt="Hacker GIF Left" class="gif">
+    
+    <div class="title-wrapper">
+      <h1>Hacked by MoneyJSY</h1>
+    </div>
+    
+    <img src="3dgifmaker62240.gif" alt="Hacker GIF Right" class="gif">
+  </div>
+
+  <!-- IP Info -->
+  <div id="ip-display">🚨 We are watching you 🚨</div>
+
+  <!-- Terminal Log -->
+  <div class="terminal">
+[ALERT] User error detected.
+[INFO] Brains not found.
+[WARNING] Site terminated due to poor life choices.
+[ACTION] A better admin has been appointed.
+[SUCCESS] Your ego has been deleted.
+  </div>
+
+  <!-- IP Details -->
+  <div id="ip-details">
+    [INFO] Location: <br>
+    [INFO] ISP: 
+  </div>
+
+  <div class="footer">
+    &copy; 2025 MoneyJSY Cybersecurity. Stay smart. Or don't.
+  </div>
+
+  <!-- Fetch and Display IP Info -->
+  <script>
+    const ipDisplay = document.getElementById("ip-display");
+    const ipDetails = document.getElementById("ip-details");
+
+    ipDisplay.textContent = "Fetching your IP...";
+
+    fetch('https://ipinfo.io/json') 
+      .then(response => {
+        if (!response.ok) throw new Error("Network response was not ok");
+        return response.json();
+      })
+      .then(data => {
+        const ip = data.ip || "Unknown IP";
+        const city = data.city || "Unknown City";
+        const region = data.region || "";
+        const country = data.country || "Unknown Country";
+        const org = data.org || "Unknown ISP";
+
+        ipDisplay.innerHTML = `IP: ${ip}`;
+
+        ipDetails.innerHTML = `
+          [INFO] Location: ${city}, ${region}, ${country}<br>
+          [INFO] ISP: ${org}
+        `;
+      })
+      .catch(error => {
+        console.error("Error fetching IP:", error);
+        ipDisplay.innerHTML = `IP: Could not retrieve`;
+        ipDetails.innerHTML = `[ERROR] Connection failed`;
+      });
+
+    // Redirect after 10 seconds
+    setTimeout(() => {
+      window.location.href = "https://moneyjsy.github.io/MoneyJSYY"; 
+    }, 10000);
+  </script>
+</body>
+</html>
